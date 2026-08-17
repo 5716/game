@@ -63,10 +63,10 @@ import { Component, signal, computed } from '@angular/core';
       @if (drawCount() > 0) {
         <h5>ნიჩიების რაოდენობა: {{ drawCount() }}</h5>
       }
-      @if (playerScore() - computerScore() > 10) {
+      @if (playerScore() - computerScore() > 2) {
         <h5>ყოჩაღ!! შენ იგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
       } @else {}
-      @if (computerScore() - playerScore() > 10) {
+      @if (computerScore() - playerScore() > 2) {
         <h5>სამწუხაროა. შენ აგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
       }
 
@@ -96,7 +96,7 @@ export class App {
 
   heartsArray = computed(() => Array(this.lives()));
 
-  tournamentOver = computed(() => this.playerScore() >= 12 || this.computerScore() >= 12);
+  tournamentOver = computed(() => this.playerScore() >= 15 || this.computerScore() >= 15);
 
   result = computed(() => {
     const p = this.player();
