@@ -10,28 +10,32 @@ import { Component, signal, computed } from '@angular/core';
         <button (click)="play('ფურცელი 🖐🏼')">ფურცელი</button>
         <button (click)="play('მაკრატელი ✌🏼')">მაკრატელი</button>
       }
-      <button (click)="reset()">რესეტი 🔃</button>
+      <button (click)="reset()">თავიდან დაწყება 🔃</button>
 
       <p class="hearts">
         @for (h of heartsArray(); track $index) {
           <span>❤️</span>
         }
         @if (lives() === 0) {
-          <span>გული აღარ გაქვს</span>
+          <span style="font-size: 17px;">
+            <span class="typing-line1">საკმარისი გული აღარ გაქვს გასაგრძელებლად.</span>
+            <span class="typing-line2">თუ გაქვს საკმარისი მონეტა,</span>
+            <span class="typing-line2">შეგიძლია შეიძინო დამატებითი 1 გული</span>
+          </span>
         }
       </p>
 
       <p>მონეტები: {{ coins() }}</p>
 
       @if (lives() === 0) {
-        <button (click)="buyHeart()">იყიდე გული (3 💰)</button>
+        <button (click)="buyHeart()">იყიდე გული (2 💰)</button>
       }
 
       <h1>{{ result() }}</h1>
 
       <div class="leaderboard">
         <div class="leaderboard-side">
-          <p class="name">შენ 🤵🏻</p>
+          <p class="name">მოთამაშე 🤵🏻</p>
           <p>{{ player() }}</p>
           <h4 class="score">{{ playerScore() }}</h4>
         </div>
@@ -92,7 +96,7 @@ export class App {
 
   heartsArray = computed(() => Array(this.lives()));
 
-  tournamentOver = computed(() => this.playerScore() >= 50 || this.computerScore() >= 50);
+  tournamentOver = computed(() => this.playerScore() >= 12 || this.computerScore() >= 12);
 
   result = computed(() => {
     const p = this.player();
@@ -102,9 +106,9 @@ export class App {
     if (p === c) return 'ნიჩია 🙌🏻';
 
     const beats: Record<string, string> = {
-      ქვა: 'მაკრატელი',
-      ფურცელი: 'ქვა',
-      მაკრატელი: 'ფურცელი',
+      'ქვა 👌🏼': 'მაკრატელი ✌🏼',
+      'ფურცელი 🖐🏼': 'ქვა 👌🏼',
+      'მაკრატელი ✌🏼': 'ფურცელი 🖐🏼',
     };
 
     return beats[p] === c ? 'შენ გაიმარჯვე 👍🏻' : 'შენ წააგე 👎🏻';
@@ -118,12 +122,12 @@ export class App {
     this.computer.set(options[Math.floor(Math.random() * options.length)]);
 
     if (this.result() == 'შენ გაიმარჯვე 👍🏻') {
-      this.playerScore.update((value) => value + 5);
+      this.playerScore.update((value) => value + 1);
       this.history.update((h) => [...h, true]);
       this.coins.update((v) => v + 1);
     }
     if (this.result() == 'შენ წააგე 👎🏻') {
-      this.computerScore.update((value) => value + 5);
+      this.computerScore.update((value) => value + 1);
       this.history.update((h) => [...h, false]);
       this.lives.update((v) => v - 1);
     }
@@ -136,8 +140,8 @@ export class App {
   }
 
   buyHeart() {
-    if (this.coins() >= 3) {
-      this.coins.update((v) => v - 3);
+    if (this.coins() >= 2) {
+      this.coins.update((v) => v - 2);
       this.lives.update((v) => v + 1);
     }
   }
