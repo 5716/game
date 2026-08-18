@@ -1,0 +1,79 @@
+<div class="container">
+  @if (!tournamentOver() && lives() > 0) {
+  <app-choice [title]="coins()" (choice)="play($event)"></app-choice>
+  }
+
+  <button (click)="reset()">თავიდან დაწყება 🔃</button>
+
+  <p class="hearts">
+    @for (h of heartsArray(); track $index) {
+    <span>❤️</span>
+    }
+    @if (lives() === 0) {
+    <span style="font-size: 17px;">
+      <span class="typing-line1">საკმარისი გული აღარ გაქვს გასაგრძელებლად.</span>
+      <span class="typing-line2">თუ გაქვს საკმარისი მონეტა,</span>
+      <span class="typing-line2">შეგიძლია შეიძინო დამატებითი 1 გული</span>
+    </span>
+    }
+  </p>
+
+  <p>მონეტები: {{ coins() }}</p>
+
+  @if (lives() === 0) {
+  <button (click)="buyHeart()">იყიდე გული (2 💰)</button>
+  }
+
+  <h1>{{ result() }}</h1>
+
+  <div class="leaderboard">
+    <div class="leaderboard-side">
+      <p class="name">მოთამაშე 🤵🏻</p>
+      <p>{{ playerMove() }}</p>
+      <h4 class="score">{{ playerScore() }}</h4>
+    </div>
+    <div class="leaderboard-side">
+      <p class="name">მეტოქე 👨🏻‍💻</p>
+      <p>{{ computerMove() }}</p>
+      <h4 class="score">{{ computerScore() }}</h4>
+    </div>
+  </div>
+
+  <button routerLink='red'>წითელი</button>
+  <button routerLink='blue'>ლურჯი</button>
+
+  <router-outlet></router-outlet>
+
+  <p>
+    @for (r of history(); track $index) {
+    @if (r === true) {
+    <span>✅ </span>
+    }
+    @if (r === false) {
+    <span>❌ </span>
+    }
+    @if (r === null) {
+    <span>➖ </span>
+    }
+    }
+  </p>
+
+  @if (drawCount() > 0) {
+  <h5>ნიჩიების რაოდენობა: {{ drawCount() }}</h5>
+  }
+  @if (playerScore() - computerScore() > 2) {
+  <h5>ყოჩაღ!! შენ იგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
+  } @else {}
+  @if (computerScore() - playerScore() > 2) {
+  <h5>სამწუხაროა. შენ აგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
+  }
+
+  @if (tournamentOver()) {
+  <h2>
+    ტურნირი დასრულდა!
+    {{
+            playerScore() > computerScore() ? 'შენ გაიმარჯვე ტურნირში 🏆' : 'შენ წააგე ტურნირი 😢'
+          }}
+  </h2>
+  }
+</div>
