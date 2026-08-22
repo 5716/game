@@ -1,1 +1,13 @@
-<p>tictactoe works!</p>,
+<p *ngIf="!winner">სვლა ეკუთვნის: {{ currentPlayer }}-ს</p>
+<p *ngIf="winner === 'Draw'">ეს თამაში ფრეა!</p>
+<p *ngIf="winner && winner !== 'Draw'">{{ winner }}-მა გაიმარჯვა!</p>
+
+<div class="board">
+  <div class="cell" *ngFor="let cell of board; let i = index" (click)="makeMove(i)">
+    {{ cell }}
+  </div>
+
+  <div *ngIf="winningComboIndex >= 0" class="line line-{{ winningComboIndex }}"></div>
+</div>
+
+<button (click)="resetGame()">თამაშის თავიდან დაწყება</button>

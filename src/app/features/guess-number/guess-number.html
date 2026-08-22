@@ -1,0 +1,7 @@
+<p>{{ message }}</p>
+
+<input type="number" [(ngModel)]="guess" [disabled]="won" (keyup.enter)="checkGuess()" />
+<button (click)="checkGuess()" [disabled]="won">გამოცნობა</button>
+<button (click)="resetGame()">თამაშის რესტარტი</button>
+
+<p>მცდელობა: {{ attempts }}</p>
