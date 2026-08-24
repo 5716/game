@@ -9,6 +9,7 @@ export const routes: Routes = [
   {
     path: 'jeirani',
     loadComponent: () => import('./features/jeirani/jeirani').then((m) => m.Jeirani),
+    title: 'ჯეირანი',
     data: { favicon: 'jeirani.ico' },
     children: [
       {
@@ -25,15 +26,19 @@ export const routes: Routes = [
   {
     path: 'tictactoe',
     loadComponent: () => import('./features/tictactoe/tictactoe').then((m) => m.Tictactoe),
+    title: 'იქსიკი და ნულიკი',
     data: { favicon: 'tictactoe.ico' },
   },
   {
     path: 'guess-number',
     loadComponent: () => import('./features/guess-number/guess-number').then((m) => m.GuessNumber),
+    title: 'გამოიცანი რიცხვი',
     data: { favicon: 'guess-number.ico' },
   },
   {
     path: '**',
     loadComponent: () => import('./shared/404/404').then((c) => c.Page404),
+    title: 'გვერდი ვერ მოიძებნა',
+    data: { favicon: '404.ico' },
   },
 ];
