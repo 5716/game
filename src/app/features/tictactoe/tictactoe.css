@@ -1,0 +1,73 @@
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+}
+
+.cell {
+  border: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.line {
+  position: absolute;
+  background: red;
+}
+
+.line-0 {
+  top: 28px;
+  left: 0;
+  width: 180px;
+  height: 4px;
+}
+.line-1 {
+  top: 88px;
+  left: 0;
+  width: 180px;
+  height: 4px;
+}
+.line-2 {
+  top: 148px;
+  left: 0;
+  width: 180px;
+  height: 4px;
+}
+
+.line-3 {
+  left: 28px;
+  top: 0;
+  width: 4px;
+  height: 180px;
+}
+.line-4 {
+  left: 88px;
+  top: 0;
+  width: 4px;
+  height: 180px;
+}
+.line-5 {
+  left: 148px;
+  top: 0;
+  width: 4px;
+  height: 180px;
+}
+
+.line-6 {
+  top: 88px;
+  left: 90px;
+  width: 255px;
+  height: 4px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.line-7 {
+  top: 88px;
+  left: 90px;
+  width: 255px;
+  height: 4px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

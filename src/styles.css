@@ -1,1 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+button {
+  padding: 8px 14px;
+  margin: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+button:hover {
+  background: #eaeaea;
+}
+h1 {
+  font-size: 20px;
+}
+.score {
+  color: #555;
+}
+.hearts {
+  font-size: 20px;
+}
+
+.leaderboard {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.leaderboard-side {
+  text-align: center;
+}
+
+/* Fade in effect + dark themed container */
+
+.container {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border-radius: 12px;
+  padding: 20px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container button {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+.container button:hover {
+  background-color: #3a3a3a;
+}
+
+.container .score {
+  color: #ccc;
+}
+
+/* Typing effect */
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  width: 0;
+  animation:
+    typing 3s steps(40, end) forwards,
+    blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typing-line1,
+.typing-line2 {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+}
+
+.typing-line1 {
+  animation: type1 1.5s linear forwards;
+}
+
+.typing-line2 {
+  animation: type2 1.5s linear forwards;
+  animation-delay: 3s;
+}
+
+@keyframes type1 {
+  to {
+    max-width: 800px;
+  }
+}
+
+@keyframes type2 {
+  to {
+    max-width: 800px;
+  }
+}
