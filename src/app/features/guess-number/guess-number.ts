@@ -10,31 +10,44 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './guess-number.css',
 })
 export class GuessNumber {
-  target = Math.floor(Math.random() * 50) + 1;
+  target = Math.floor(Math.random() * 20) + 1;
   guess = null;
-  message = 'გამოიცანი ჩაფიქრებული რიცხვი, რომელიც არის 1 დან 50 მდე';
+  message = 'გამოიცანი რიცხვი 1 დან 20-ის ჩათვლით';
   attempts = 0;
+  maxAttempts = 5;
   won = false;
+  gameOver = false;
+
+  get isValid() {
+    const n = Number(this.guess);
+    return this.guess !== null && this.guess !== '' && n >= 1 && n <= 20;
+  }
 
   checkGuess() {
+    if (!this.isValid) return;
+
     const guessNumber = Number(this.guess);
     this.attempts++;
 
     if (guessNumber === this.target) {
-      this.message = `სწორია! ჩაფიქრებული რიცხვი იყო ${this.target}. შენ დაგჭირდა ${this.attempts} ცდა.`;
+      this.message = `მართალია! ჩაფიქრებული რიცხვი იყო ${this.target}. შენ დაგჭირდა ${this.attempts} მცდელობა ამ რიცხვის გამოსაცნობად.`;
       this.won = true;
+    } else if (this.attempts >= this.maxAttempts) {
+      this.message = `შენ ვერ გამოიცანი ჩაფიქრებული რიცხვი, რომელიც იყო ${this.target}`;
+      this.gameOver = true;
     } else if (guessNumber > this.target) {
-      this.message = 'ეს რიცხვი ჩაფიქრებულ რიცხვზე მაღალია, სცადე ხელახლა';
+      this.message = 'მაღალია, გაიმეორე მცდელობა';
     } else {
-      this.message = 'ეს რიცხვი ჩაფიქრებულ რიცხვზე დაბალია, სცადე ხელახლა';
+      this.message = 'დაბალია, სცადე ხელახლა';
     }
   }
 
   resetGame() {
-    this.target = Math.floor(Math.random() * 50) + 1;
+    this.target = Math.floor(Math.random() * 20) + 1;
     this.guess = null;
-    this.message = 'გამოიცანი ჩაფიქრებული რიცხვი, რომელიც არის 1 დან 50 მდე';
+    this.message = 'გამოიცანი რიცხვი 1 დან 20-ის ჩათვლით';
     this.attempts = 0;
     this.won = false;
+    this.gameOver = false;
   }
 }

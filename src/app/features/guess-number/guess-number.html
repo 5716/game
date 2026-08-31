@@ -1,7 +1,12 @@
 <p>{{ message }}</p>
 
-<input type="number" [(ngModel)]="guess" [disabled]="won" (keyup.enter)="checkGuess()" />
-<button (click)="checkGuess()" [disabled]="won">გამოცნობა</button>
+<input
+  type="number"
+  [(ngModel)]="guess"
+  [disabled]="won || gameOver"
+  (keyup.enter)="checkGuess()"
+/>
+<button (click)="checkGuess()" [disabled]="won || gameOver || !isValid">რიცხვის გამოცნობა</button>
 <button (click)="resetGame()">თამაშის რესტარტი</button>
 
-<p>მცდელობა: {{ attempts }}</p>
+<p>მცდელობების რაოდენობა: {{ attempts }} / {{ maxAttempts }}</p>
