@@ -1,15 +1,15 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { Choice } from "./choice/choice";
+import { Choice } from './choice/choice';
+import { Results } from './results/results';
 
 @Component({
   selector: 'app-jeirani',
-  imports: [Choice, RouterOutlet, RouterLink],
+  imports: [Choice, RouterOutlet, RouterLink, Results],
   templateUrl: './jeirani.html',
   styleUrls: ['./jeirani.css'],
 })
 export class Jeirani {
-
   playerMove = signal('');
   computerMove = signal('');
 
@@ -84,5 +84,4 @@ export class Jeirani {
     this.lives.set(3);
     this.coins.set(0);
   }
-
 }

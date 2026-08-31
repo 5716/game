@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,4 +7,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
 })
-export class Dashboard { }
+export class Dashboard {
+  @Output() darkModeToggled = new EventEmitter<void>();
+
+  onDarkModeClick() {
+    this.darkModeToggled.emit();
+  }
+}

@@ -38,23 +38,13 @@ h1 {
   text-align: center;
 }
 
-/* Fade in effect + dark themed container */
+/* Dark themed container */
 
 .container {
   background-color: #1a1a1a;
   color: #f0f0f0;
   border-radius: 12px;
   padding: 20px;
-  animation: fadeIn 0.8s ease-in;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .container button {
@@ -71,59 +61,15 @@ h1 {
   color: #ccc;
 }
 
-/* Typing effect */
+/* Dark Mode */
 
-.typing-text {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid;
-  width: 0;
-  animation:
-    typing 3s steps(40, end) forwards,
-    blink 0.7s step-end infinite;
+body.dark-mode {
+  background: #111;
+  color: #eee;
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-.typing-line1,
-.typing-line2 {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 0;
-}
-
-.typing-line1 {
-  animation: type1 1.5s linear forwards;
-}
-
-.typing-line2 {
-  animation: type2 1.5s linear forwards;
-  animation-delay: 3s;
-}
-
-@keyframes type1 {
-  to {
-    max-width: 800px;
-  }
-}
-
-@keyframes type2 {
-  to {
-    max-width: 800px;
-  }
+body.dark-mode button {
+  background: #333;
+  color: #eee;
+  border: 1px solid #555;
 }

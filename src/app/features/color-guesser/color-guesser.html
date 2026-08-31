@@ -1,0 +1,13 @@
+<p>ქულა: {{ score }}</p>
+
+<p>გამოიცანი ფერი</p>
+
+<p *ngIf="messagePrefix">
+  {{ messagePrefix }}<span [style.color]="messageColor">{{ target.name }}</span>
+</p>
+
+<div class="options">
+  <button *ngFor="let color of options" [style.color]="color.value" (click)="guess(color)">
+    {{ color.name }}
+  </button>
+</div>

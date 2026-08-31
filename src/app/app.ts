@@ -10,10 +10,14 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: 'app.html',
 })
 export class App {
+  isDarkMode = localStorage.getItem('darkMode') === 'true';
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+
     this.router.events.subscribe(() => {
       let route = this.activatedRoute;
 
@@ -27,5 +31,11 @@ export class App {
         document.querySelector('link[rel="icon"]')?.setAttribute('href', favicon);
       }
     });
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+    localStorage.setItem('darkMode', String(this.isDarkMode));
   }
 }

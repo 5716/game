@@ -1,6 +1,10 @@
 :host {
-  display: block;
+  display: flex;
   background-color: #272727;
   padding: 10px 20px;
   margin-bottom: 30px;
+}
+
+.dark-mode-btn {
+  margin-left: auto;
 }

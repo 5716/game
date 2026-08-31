@@ -1,0 +1,13 @@
+<p>
+  @for (r of history(); track $index) {
+    @if (r === true) {
+      <span>✅ </span>
+    }
+    @if (r === false) {
+      <span>❌ </span>
+    }
+    @if (r === null) {
+      <span>➖ </span>
+    }
+  }
+</p>

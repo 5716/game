@@ -36,6 +36,13 @@ export const routes: Routes = [
     data: { favicon: 'guess-number.ico' },
   },
   {
+    path: 'color-guesser',
+    loadComponent: () =>
+      import('./features/color-guesser/color-guesser').then((m) => m.ColorGuesser),
+    title: 'გამოიცანი ფერი',
+    data: { favicon: 'guess-number.ico' },
+  },
+  {
     path: '**',
     loadComponent: () => import('./shared/404/404').then((c) => c.Page404),
     title: 'გვერდი ვერ მოიძებნა',
