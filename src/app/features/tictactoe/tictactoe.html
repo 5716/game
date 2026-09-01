@@ -1,6 +1,9 @@
 <p *ngIf="!winner">სვლა ეკუთვნის: {{ currentPlayer }}-ს</p>
 <p *ngIf="winner === 'Draw'">ეს თამაში ფრეა!</p>
-<p *ngIf="winner && winner !== 'Draw'">{{ winner }}-მა გაიმარჯვა!</p>
+
+@if(winner && winner !== 'Draw') {
+<p>{{ winner }}-მა გაიმარჯვა!</p>
+}
 
 <div class="board">
   <div class="cell" *ngFor="let cell of board; let i = index" (click)="makeMove(i)">

@@ -1,51 +1,62 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, computed, linkedSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-guess-number',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './guess-number.html',
   styleUrl: './guess-number.css',
 })
+
 export class GuessNumber {
-  target = Math.floor(Math.random() * 20) + 1;
-  guess = null;
-  message = 'გამოიცანი რიცხვი 1 დან 20-ის ჩათვლით';
+
+  maxValue = signal(20);
+  target = Math.floor(Math.random() * this.maxValue()) + 1;
+  guess = signal<number | null>(null);
+  guessValue = computed(() => this.guess());
+  message = linkedSignal(() => `გამოიცანი რიცხვი 1 დან ${this.maxValue()}-ის ჩათვლით`);
   attempts = 0;
   maxAttempts = 5;
   won = false;
   gameOver = false;
 
-  get isValid() {
-    const n = Number(this.guess);
-    return this.guess !== null && this.guess !== '' && n >= 1 && n <= 20;
-  }
+
+  saba = signal('');
+
+  // get isValid() {
+  //   const n = Number(this.guess);
+  //   return this.guess !== null && this.guess !== '' && n >= 1 && n <= 20;
+  // }
+
+  isValid = computed(() => {
+    const n = Number(this.guess());
+    return n !== null && n >= 1 && n <= this.maxValue();
+  });
 
   checkGuess() {
-    if (!this.isValid) return;
+    if (!this.isValid()) return;
 
-    const guessNumber = Number(this.guess);
+    const guessNumber = Number(this.guess());
     this.attempts++;
 
     if (guessNumber === this.target) {
-      this.message = `მართალია! ჩაფიქრებული რიცხვი იყო ${this.target}. შენ დაგჭირდა ${this.attempts} მცდელობა ამ რიცხვის გამოსაცნობად.`;
+      this.message.set(`მართალია! ჩაფიქრებული რიცხვი იყო ${this.target}. შენ დაგჭირდა ${this.attempts} მცდელობა ამ რიცხვის გამოსაცნობად.`);
       this.won = true;
     } else if (this.attempts >= this.maxAttempts) {
-      this.message = `შენ ვერ გამოიცანი ჩაფიქრებული რიცხვი, რომელიც იყო ${this.target}`;
+      this.message.set(`შენ ვერ გამოიცანი ჩაფიქრებული რიცხვი, რომელიც იყო ${this.target}`);
       this.gameOver = true;
     } else if (guessNumber > this.target) {
-      this.message = 'მაღალია, გაიმეორე მცდელობა';
+      this.message.set('მაღალია, გაიმეორე მცდელობა');
     } else {
-      this.message = 'დაბალია, სცადე ხელახლა';
+      this.message.set('დაბალია, სცადე ხელახლა');
     }
   }
 
   resetGame() {
-    this.target = Math.floor(Math.random() * 20) + 1;
-    this.guess = null;
-    this.message = 'გამოიცანი რიცხვი 1 დან 20-ის ჩათვლით';
+    this.target = Math.floor(Math.random() * this.maxValue()) + 1;
+    this.guess.set(null);
+    this.message.set(`გამოიცანი რიცხვი 1 დან ${this.maxValue()}-ის ჩათვლით`);
     this.attempts = 0;
     this.won = false;
     this.gameOver = false;
