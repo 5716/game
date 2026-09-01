@@ -1,5 +1,7 @@
-game collection featuring:
+Game Web App
 
-rock paper scissors
-tic tac toe
-number & color guessing games
+A simple web-based game collection featuring:
+
+Rock Paper Scissors
+Tic-Tac-Toe
+Number Guessing Game
