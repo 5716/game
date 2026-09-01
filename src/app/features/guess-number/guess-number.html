@@ -1,18 +1,25 @@
 <p>{{ message() }}</p>
 
-<input type="number" min='0' [max]='maxValue()' [(ngModel)]="guess" [disabled]="won || gameOver" (keyup.enter)="checkGuess()" />
-<button (click)="checkGuess()" [disabled]="won || gameOver || !isValid()">რიცხვის გამოცნობა</button>
+<input
+  type="number"
+  min="0"
+  [max]="maxValue()"
+  [value]="guess()"
+  (input)="guess.set($any($event.target).valueAsNumber)"
+  [disabled]="won() || gameOver()"
+  (keyup.enter)="checkGuess()"
+/>
+<button (click)="checkGuess()" [disabled]="won() || gameOver() || !isValid()">
+  რიცხვის გამოცნობა
+</button>
 <button (click)="resetGame()">თამაშის რესტარტი</button>
 
-<p>მცდელობების რაოდენობა: {{ attempts }} / {{ maxAttempts }}</p>
-
+<p>მცდელობების რაოდენობა: {{ attempts() }} / {{ maxAttempts() }}</p>
 
 <button (click)="maxValue.set(20)">20</button>
 <button (click)="maxValue.set(50)">50</button>
 <button (click)="maxValue.set(100)">100</button>
 
-
 <input type="number" (input)="saba.set($event.target.value)" />
-
 
 <p>{{ saba() }}</p>
