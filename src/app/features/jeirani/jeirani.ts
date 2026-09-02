@@ -1,11 +1,10 @@
 import { Component, computed, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { Choice } from './choice/choice';
 import { Results } from './results/results';
 
 @Component({
   selector: 'app-jeirani',
-  imports: [Choice, RouterOutlet, RouterLink, Results],
+  imports: [Choice, Results],
   templateUrl: './jeirani.html',
   styleUrls: ['./jeirani.css'],
 })

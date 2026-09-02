@@ -9,6 +9,7 @@ import { Component, computed, linkedSignal, signal } from '@angular/core';
 })
 export class GuessNumber {
   maxValue = signal(20);
+
   target = signal(Math.floor(Math.random() * this.maxValue()) + 1);
   guess = signal<number | null>(null);
   guessValue = computed(() => this.guess());
