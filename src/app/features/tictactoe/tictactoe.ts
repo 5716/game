@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-tictactoe',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './tictactoe.html',
   styleUrl: './tictactoe.css',
 })
 export class Tictactoe {
-  board = ['', '', '', '', '', '', '', '', ''];
-  currentPlayer = 'X';
-  winner = '';
-  winningComboIndex = -1;
+  board = signal(['', '', '', '', '', '', '', '', '']);
+  currentPlayer = signal('X');
+  winner = signal('');
+  winningComboIndex = signal(-1);
 
   winCombos = [
     [0, 1, 2],
@@ -26,35 +25,40 @@ export class Tictactoe {
   ];
 
   makeMove(index: number) {
-    if (this.board[index] || this.winner) return;
+    if (this.board()[index] || this.winner()) return;
 
-    this.board[index] = this.currentPlayer;
+    this.board.update((b) => {
+      const copy = [...b];
+      copy[index] = this.currentPlayer();
+      return copy;
+    });
     this.checkWinner();
 
-    if (!this.winner) {
-      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+    if (!this.winner()) {
+      this.currentPlayer.set(this.currentPlayer() === 'X' ? 'O' : 'X');
     }
   }
 
   checkWinner() {
+    const board = this.board();
     for (let i = 0; i < this.winCombos.length; i++) {
       const [a, b, c] = this.winCombos[i];
-      if (this.board[a] && this.board[a] === this.board[b] && this.board[a] === this.board[c]) {
-        this.winner = this.board[a];
-        this.winningComboIndex = i;
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        this.winner.set(board[a]);
+        this.winningComboIndex.set(i);
         return;
       }
     }
 
-    if (!this.board.includes('')) {
-      this.winner = 'Draw';
+    if (!board.includes('')) {
+      this.winner.set('Draw');
     }
   }
 
   resetGame() {
-    this.board = ['', '', '', '', '', '', '', '', ''];
-    this.currentPlayer = 'X';
-    this.winner = '';
-    this.winningComboIndex = -1;
+    this.board.set(['', '', '', '', '', '', '', '', '']);
+    this.currentPlayer.set('X');
+    this.winner.set('');
+    this.winningComboIndex.set(-1);
   }
 }

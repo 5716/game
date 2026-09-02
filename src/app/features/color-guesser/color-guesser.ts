@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-color-guesser',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './color-guesser.html',
   styleUrl: './color-guesser.css',
 })
@@ -24,12 +23,12 @@ export class ColorGuesser {
     { name: 'მაგენტა', value: 'rgb(255, 0, 255)' },
   ];
 
-  target = this.colors[0];
-  options = [this.colors[0], this.colors[1], this.colors[2]];
-  score = 0;
-  messagePrefix = '';
-  messageColor = '';
-  wasCorrect = false;
+  target = signal(this.colors[0]);
+  options = signal([this.colors[0], this.colors[1], this.colors[2]]);
+  score = signal(0);
+  messagePrefix = signal('');
+  messageColor = signal('');
+  wasCorrect = signal(false);
 
   constructor() {
     this.newRound();
@@ -37,22 +36,23 @@ export class ColorGuesser {
 
   newRound() {
     const shuffled = [...this.colors].sort(() => Math.random() - 0.5);
-    this.options = shuffled.slice(0, 4);
-    this.target = this.options[Math.floor(Math.random() * this.options.length)];
-    this.messagePrefix = '';
+    const newOptions = shuffled.slice(0, 4);
+    this.options.set(newOptions);
+    this.target.set(newOptions[Math.floor(Math.random() * newOptions.length)]);
+    this.messagePrefix.set('');
   }
 
   guess(color: { name: string; value: string }) {
-    if (color.name === this.target.name) {
-      this.score++;
-      this.messagePrefix = 'სწორია! ჩაფიქრებული ფერი იყო ';
-      this.wasCorrect = true;
+    if (color.name === this.target().name) {
+      this.score.update((s) => s + 1);
+      this.messagePrefix.set('სწორია! ჩაფიქრებული ფერი იყო ');
+      this.wasCorrect.set(true);
     } else {
-      this.messagePrefix = 'არასწორია, სწორი ფერი იყო ';
-      this.wasCorrect = false;
+      this.messagePrefix.set('არასწორია, სწორი ფერი იყო ');
+      this.wasCorrect.set(false);
     }
-    this.messageColor = this.target.value;
+    this.messageColor.set(this.target().value);
 
-    setTimeout(() => this.newRound(), 1200);
+    setTimeout(() => this.newRound(), 3000);
   }
 }

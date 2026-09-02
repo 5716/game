@@ -7,8 +7,6 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './choice.css',
 })
 export class Choice {
-
   title = input<number>();
   choice = output<string>();
-
 }

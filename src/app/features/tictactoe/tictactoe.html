@@ -1,16 +1,23 @@
-<p *ngIf="!winner">სვლა ეკუთვნის: {{ currentPlayer }}-ს</p>
-<p *ngIf="winner === 'Draw'">ეს თამაში ფრეა!</p>
-
-@if(winner && winner !== 'Draw') {
-<p>{{ winner }}-მა გაიმარჯვა!</p>
+@if (!winner()) {
+  <p>სვლა ეკუთვნის: {{ currentPlayer() }}-ს</p>
+}
+@if (winner() === 'Draw') {
+  <p>ეს თამაში ფრეა!</p>
+}
+@if (winner() && winner() !== 'Draw') {
+  <p>{{ winner() }}-მა გაიმარჯვა!</p>
 }
 
 <div class="board">
-  <div class="cell" *ngFor="let cell of board; let i = index" (click)="makeMove(i)">
-    {{ cell }}
-  </div>
+  @for (cell of board(); track $index) {
+    <div class="cell" (click)="makeMove($index)">
+      {{ cell }}
+    </div>
+  }
 
-  <div *ngIf="winningComboIndex >= 0" class="line line-{{ winningComboIndex }}"></div>
+  @if (winningComboIndex() >= 0) {
+    <div class="line line-{{ winningComboIndex() }}"></div>
+  }
 </div>
 
 <button (click)="resetGame()">თამაშის თავიდან დაწყება</button>
