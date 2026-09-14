@@ -1,13 +1,13 @@
-<p>
+<p class="flex flex-wrap justify-center gap-1 text-lg">
   @for (r of history(); track $index) {
     @if (r === true) {
-      <span>✅ </span>
+      <span>✅</span>
     }
     @if (r === false) {
-      <span>❌ </span>
+      <span>❌</span>
     }
     @if (r === null) {
-      <span>➖ </span>
+      <span>➖</span>
     }
   }
 </p>

@@ -1,25 +1,44 @@
-<p>{{ message() }}</p>
+<div class="w-full max-w-[400px] mx-auto my-10 text-center bg-[#1a1a1a] text-[#f0f0f0] rounded-xl p-5">
 
-<input
-  type="number"
-  min="0"
-  [max]="maxValue()"
-  [value]="guess()"
-  (input)="guess.set($any($event.target).valueAsNumber)"
-  [disabled]="won() || gameOver()"
-  (keyup.enter)="checkGuess()"
-/>
-<button (click)="checkGuess()" [disabled]="won() || gameOver() || !isValid()">
-  რიცხვის გამოცნობა
-</button>
-<button (click)="resetGame()">თამაშის რესტარტი</button>
+  <p>{{ message() }}</p>
 
-<p>მცდელობების რაოდენობა: {{ attempts() }} / {{ maxAttempts() }}</p>
+  <input
+    nz-input
+    type="number"
+    min="0"
+    [max]="maxValue()"
+    [value]="guess()"
+    (input)="guess.set($any($event.target).valueAsNumber)"
+    [disabled]="won() || gameOver()"
+    (keyup.enter)="checkGuess()"
+    class="max-w-[150px] mx-auto my-2"
+  />
 
-<button (click)="maxValue.set(20)">20</button>
-<button (click)="maxValue.set(50)">50</button>
-<button (click)="maxValue.set(100)">100</button>
+  <div>
+    <button
+      appearance-none
+      (click)="checkGuess()"
+      [disabled]="won() || gameOver() || !isValid()"
+      class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea] disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      რიცხვის გამოცნობა
+    </button>
 
-<!-- <input type="number" (input)="saba.set($event.target.value)" />
+    <button
+      appearance-none
+      (click)="resetGame()"
+      class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea]"
+    >
+      თამაშის რესტარტი
+    </button>
+  </div>
 
-<p>{{ saba() }}</p> -->
+  <p>მცდელობების რაოდენობა: {{ attempts() }} / {{ maxAttempts() }}</p>
+
+  <div class="flex justify-center gap-2">
+    <button appearance-none (click)="maxValue.set(20)" class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea]">20</button>
+    <button appearance-none (click)="maxValue.set(50)" class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea]">50</button>
+    <button appearance-none (click)="maxValue.set(100)" class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea]">100</button>
+  </div>
+
+</div>

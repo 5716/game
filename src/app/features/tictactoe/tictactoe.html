@@ -8,9 +8,9 @@
   <p>{{ winner() }}-მა გაიმარჯვა!</p>
 }
 
-<div class="board">
+<div class="relative grid grid-cols-[repeat(3,60px)] grid-rows-[repeat(3,60px)]">
   @for (cell of board(); track $index) {
-    <div class="cell" (click)="makeMove($index)">
+    <div class="border border-[#444] flex items-center justify-center text-2xl cursor-pointer" (click)="makeMove($index)">
       {{ cell }}
     </div>
   }
@@ -20,4 +20,9 @@
   }
 </div>
 
-<button (click)="resetGame()">თამაშის თავიდან დაწყება</button>
+<button
+  (click)="resetGame()"
+  class="px-3.5 py-2 m-1 rounded-full bg-[#f5f5f5] text-[#1a1a1a] font-medium shadow-sm cursor-pointer transition-colors hover:bg-[#eaeaea]"
+>
+  თამაშის თავიდან დაწყება
+</button>

@@ -1,9 +1,10 @@
 import { Component, computed, linkedSignal, signal } from '@angular/core';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-guess-number',
   standalone: true,
-  imports: [],
+  imports: [NzInputModule],
   templateUrl: './guess-number.html',
   styleUrl: './guess-number.css',
 })
