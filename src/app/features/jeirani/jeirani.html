@@ -9,12 +9,6 @@
   >
     თავიდან დაწყება 🔃
   </button>
-  
-  <!-- <button nz-button nzType="primary">Primary</button>
-<button nz-button nzType="default">Default</button>
-<button nz-button nzType="dashed">Dashed</button>
-<button nz-button nzType="text">Text</button>
-<button nz-button nzType="link">Link</button> -->
 
   <p class="text-xl">
     @for (h of heartsArray(); track $index) {
@@ -68,7 +62,7 @@
   }
 
   @if (tournamentOver()) {
-    <h2>
+    <h2 class="text-xl text-[#f0f0f0]">
       ტურნირი დასრულდა!
       {{ playerScore() > computerScore() ? 'შენ გაიმარჯვე ტურნირში 🏆' : 'შენ წააგე ტურნირი 😢' }}
     </h2>
