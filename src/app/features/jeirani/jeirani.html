@@ -1,11 +1,16 @@
-<div class="container">
+<div class="max-w-[400px] mx-auto my-10 text-center bg-[#1a1a1a] text-[#f0f0f0] rounded-xl p-5">
   @if (!tournamentOver() && lives() > 0) {
     <app-choice [title]="coins()" (choice)="play($event)"></app-choice>
   }
 
-  <button (click)="reset()">თავიდან დაწყება 🔃</button>
+  <button
+    class="px-3.5 py-2 m-1 border border-[#ccc] rounded-md bg-[#f5f5f5] text-[#1a1a1a] cursor-pointer hover:bg-[#eaeaea]"
+    (click)="reset()"
+  >
+    თავიდან დაწყება 🔃
+  </button>
 
-  <p class="hearts">
+  <p class="text-xl">
     @for (h of heartsArray(); track $index) {
       <span>❤️</span>
     }
@@ -21,34 +26,39 @@
   <p>მონეტები: {{ coins() }}</p>
 
   @if (lives() === 0) {
-    <button (click)="buyHeart()">იყიდე გული (2 💰)</button>
+    <button
+      class="px-3.5 py-2 m-1 border border-[#ccc] rounded-md bg-[#f5f5f5] text-[#1a1a1a] cursor-pointer hover:bg-[#eaeaea]"
+      (click)="buyHeart()"
+    >
+      იყიდე გული (2 💰)
+    </button>
   }
 
-  <h1>{{ result() }}</h1>
+  <h1 class="text-xl text-[#f0f0f0]">{{ result() }}</h1>
 
-  <div class="leaderboard">
-    <div class="leaderboard-side">
+  <div class="flex justify-between gap-5">
+    <div class="text-center">
       <p class="name">მოთამაშე 🤵🏻</p>
       <p>{{ playerMove() }}</p>
-      <h4 class="score">{{ playerScore() }}</h4>
+      <h4 class="text-[#ccc]">{{ playerScore() }}</h4>
     </div>
-    <div class="leaderboard-side">
+    <div class="text-center">
       <p class="name">მეტოქე 👨🏻‍💻</p>
       <p>{{ computerMove() }}</p>
-      <h4 class="score">{{ computerScore() }}</h4>
+      <h4 class="text-[#ccc]">{{ computerScore() }}</h4>
     </div>
   </div>
 
   <app-results [history]="history()"></app-results>
 
   @if (drawCount() > 0) {
-    <h5>ნიჩიების რაოდენობა: {{ drawCount() }}</h5>
+    <h5 class="text-xl text-[#f0f0f0]">ნიჩიების რაოდენობა: {{ drawCount() }}</h5>
   }
   @if (playerScore() - computerScore() > 2) {
-    <h5>ყოჩაღ!! შენ იგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
+    <h5 class="text-xl text-[#f0f0f0]">ყოჩაღ!! შენ იგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
   } @else {}
   @if (computerScore() - playerScore() > 2) {
-    <h5>სამწუხაროა. შენ აგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
+    <h5 class="text-xl text-[#f0f0f0]">სამწუხაროა. შენ აგებ დიდი ანგარიშით მეტოქის წინააღმდეგ</h5>
   }
 
   @if (tournamentOver()) {

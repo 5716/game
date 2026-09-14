@@ -1,29 +1,27 @@
-body {
-  font-family: sans-serif;
-  padding: 0;
-  margin: 0;
-}
-.container {
-  max-width: 400px;
-  margin: 40px auto;
-  text-align: center;
-}
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+
 button {
   padding: 8px 14px;
   margin: 4px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: light-dark(#f5f5f5, #ff0000);
+  background-color: #f5f5f5;
+  color: #1a1a1a;
   cursor: pointer;
 }
 button:hover {
   background: #eaeaea;
 }
-h1 {
+h1,
+h5 {
   font-size: 20px;
+  color: #f0f0f0;
 }
 .score {
-  color: #555;
+  color: #ccc;
 }
 .hearts {
   font-size: 20px;
@@ -37,51 +35,3 @@ h1 {
 .leaderboard-side {
   text-align: center;
 }
-
-/* Dark themed container */
-/*
-.container {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.container button {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
-  border-color: #444;
-} */
-
-.container button:hover {
-  background-color: #3a3a3a;
-}
-
-.container .score {
-  color: #ccc;
-}
-
-/* Dark Mode */
-
-body.dark-mode {
-  background: #111;
-  color: #eee;
-}
-
-/* body.dark-mode button {
-  background: #333;
-  color: #eee;
-  border: 1px solid #555;
-} */
-.container {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-/* .container button {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
-  border-color: #444;
-} */
